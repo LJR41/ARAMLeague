@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import MatchHistory from './MatchHistory'
+import TopDamage from './TopDamage'
 
 const Leaderboard = () => {
     const { id } = useParams()
@@ -60,29 +61,33 @@ const Leaderboard = () => {
 
     }, [])
     return (
-        <div>
-            {leaderboardData ? <div class="mt-5"><table class="table table-sm table-secondary table-bordered" >
-                <thead>
-                    <tr>
-                        <th scope="col">Placement</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Earnings</th>
-                        <th scope="col">Wins</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    {leaderboardData.slice(1).map((eachUser, Idx) => {
-                        return (
-                            <tr>
-                                <th scope="row">{Idx + 1}</th>
-                                <td>{eachUser.display_name}</td>
-                                <td>{eachUser.earnings >= 0 ? <p class="text-success">${eachUser.earnings}</p> : <p class="text-danger">-${eachUser.earnings * -1}</p>}</td>
-                                <td>{eachUser.wins}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table></div> : <div>Loading....</div>}
+        <div class="row d-flex justify-content-center">
+            <div class='col-4'>
+                <div><h4 class="mt-3">Top Earners</h4></div>
+                {leaderboardData ? <div class="mt-3"><table class="table table-sm table-secondary table-bordered" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Placement</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Earnings</th>
+                            <th scope="col">Wins</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {leaderboardData.slice(1).map((eachUser, Idx) => {
+                            return (
+                                <tr>
+                                    <th scope="row">{Idx + 1}</th>
+                                    <td>{eachUser.display_name}</td>
+                                    <td>{eachUser.earnings >= 0 ? <p class="text-success">${eachUser.earnings}</p> : <p class="text-danger">-${eachUser.earnings * -1}</p>}</td>
+                                    <td>{eachUser.wins}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table></div> : <div>Loading....</div>}
+            </div>
+            <div><TopDamage></TopDamage></div>
         </div>
     )
 }

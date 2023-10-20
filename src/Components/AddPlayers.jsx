@@ -73,9 +73,6 @@ const AddPlayers = () => {
     }
 
     const handleSubmit = (e) => {
-        if(onFire){
-            
-        }
         e.preventDefault()
         axios.post('http://localhost:8000/api/add/players', { latestMatch, matchWinner, matchLoser })
             .then(res => {
