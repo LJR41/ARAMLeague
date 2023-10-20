@@ -6,13 +6,7 @@ import MatchHistory from './MatchHistory'
 const Leaderboard = () => {
     const { id } = useParams()
     const [allUser, setAllUser] = useState()
-    const [leaderboardData, setLeaderboardData] = useState([{
-        display_name: "",
-        wins: null,
-        losses: null,
-        earnings: null
-    }])
-    // const [sortedLeader, setSortedLeader] = useState()
+    const [leaderboardData, setLeaderboardData] = useState([{}])
 
     useEffect(() => {
         async function getEarningsData(id) {
@@ -40,32 +34,27 @@ const Leaderboard = () => {
                 lossTotal += matchLoss
             }
 
-            setLeaderboardData(leaderboardData => [
-                ...leaderboardData, {
-                    display_name: user_display_name,
-                    wins: matchesWon.length,
-                    losses: matchesLost.length,
-                    earnings: winTotal - lossTotal
-                }
-            ])
-
-            leaderboardData.sort((a, b) => a.earnings - b.earnings)
+            return {
+                display_name: user_display_name,
+                wins: matchesWon.length,
+                losses: matchesLost.length,
+                earnings: winTotal - lossTotal
+            }
         }
 
 
         axios.get('http://localhost:8000/api/users')
             .then(response => {
+                console.log("1")
                 let orderedData = []
                 for (let i = 0; i < response.data.length; i++) {
-                    let playerData = getEarningsData(response.data[i]._id)
-                    // orderedData.push(playerData)
+                    getEarningsData(response.data[i]._id)
+                        .then(res => {
+                            setLeaderboardData(leaderboardData => [
+                                ...leaderboardData.sort(function(a, b) {return b.earnings - a.earnings}), res
+                            ])
+                        })
                 }
-                let tempArr = []
-                for (let i = 1; i < response.data.length; i++) {
-                    // tempArr.push(leaderboardData[i])
-                    console.log(leaderboardData)
-                }
-                // console.log(tempArr)
             })
             .catch(err => console.log(err))
 
@@ -79,18 +68,16 @@ const Leaderboard = () => {
                         <th scope="col">Name</th>
                         <th scope="col">Earnings</th>
                         <th scope="col">Wins</th>
-                        <th scope="col">Losses</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     {leaderboardData.slice(1).map((eachUser, Idx) => {
                         return (
                             <tr>
-                                <th scope="row">{Idx +1}</th>
+                                <th scope="row">{Idx + 1}</th>
                                 <td>{eachUser.display_name}</td>
-                                <td>{eachUser.earnings >= 0? <p class="text-success">${eachUser.earnings}</p>: <p class="text-danger">-${eachUser.earnings * -1}</p>}</td>
+                                <td>{eachUser.earnings >= 0 ? <p class="text-success">${eachUser.earnings}</p> : <p class="text-danger">-${eachUser.earnings * -1}</p>}</td>
                                 <td>{eachUser.wins}</td>
-                                <td>{eachUser.losses}</td>
                             </tr>
                         )
                     })}
