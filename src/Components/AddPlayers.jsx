@@ -19,6 +19,7 @@ const AddPlayers = () => {
     const [winnerDataChampion, setWinnerDataChampion] = useState("")
     const [winnerDataDamage, setWinnerDataDamage] = useState()
     const [onFire, setOnFire] = useState(false)
+    const [bounty, setBounty] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users')
@@ -108,6 +109,16 @@ const AddPlayers = () => {
                 }
             })
     }
+    const handleBounty = (e)=>{
+        if (!bounty) {
+            setBounty(true)
+            setAmountLost(amountLost+.5)
+        }
+        else {
+            setBounty(false)
+            setAmountLost(amountLost-.5)
+        }
+    }
 
     return (
         <div>
@@ -139,8 +150,14 @@ const AddPlayers = () => {
 
                             </div>
                             <div>
-                                <label htmlFor="onfire">On Fire</label>
-                                <input type="checkbox" onChange={handleFire} name="onfire" class="mx-2" />
+                                <div>
+                                    <label htmlFor="onfire" class="mx-2">On Fire</label>
+                                    <input type="checkbox" onChange={handleFire} name="onfire"  />
+                                </div>
+                                <div>
+                                    <label htmlFor="bounty" class="mx-2">Bounty Claimed</label>
+                                    <input type="checkbox" name="bounty" value="1" onChange={handleBounty} class="mx-1"/>
+                                </div>
                             </div>
                         </div>
                         <div class="mt-2">

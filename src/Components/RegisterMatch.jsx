@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 
-const RegisterMatch = () => {
+const RegisterMatch = (props) => {
     const navigate = useNavigate()
     const [teamResult, setTeamResult] = useState()
     const [errors, setErrors] = useState({
