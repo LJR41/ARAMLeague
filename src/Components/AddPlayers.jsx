@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
+import Pentakill from './Pentakill'
 
 const AddPlayers = () => {
     const [allUser, setAllUser] = useState([])
@@ -20,6 +21,7 @@ const AddPlayers = () => {
     const [winnerDataDamage, setWinnerDataDamage] = useState()
     const [onFire, setOnFire] = useState(false)
     const [bounty, setBounty] = useState(false)
+    const[pentaKill, setPentakill] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users')
@@ -64,11 +66,11 @@ const AddPlayers = () => {
     const handleFire = (e) => {
         if (!onFire) {
             setOnFire(true)
-            setAmountLost(amountLost*2)
+            setAmountLost(amountLost * 2)
         }
         else {
             setOnFire(false)
-            setAmountLost(amountLost/2)
+            setAmountLost(amountLost / 2)
         }
 
     }
@@ -109,14 +111,23 @@ const AddPlayers = () => {
                 }
             })
     }
-    const handleBounty = (e)=>{
+    const handleBounty = (e) => {
         if (!bounty) {
             setBounty(true)
-            setAmountLost(amountLost+.5)
+            setAmountLost(amountLost + .5)
         }
         else {
             setBounty(false)
-            setAmountLost(amountLost-.5)
+            setAmountLost(amountLost - .5)
+        }
+    }
+
+    const showPentakill = () =>{
+        if(!pentaKill){
+            setPentakill(true)
+        }
+        else{
+            setPentakill(false)
         }
     }
 
@@ -152,11 +163,15 @@ const AddPlayers = () => {
                             <div>
                                 <div>
                                     <label htmlFor="onfire" class="mx-2">On Fire</label>
-                                    <input type="checkbox" onChange={handleFire} name="onfire"  />
+                                    <input type="checkbox" onChange={handleFire} name="onfire" />
                                 </div>
                                 <div>
                                     <label htmlFor="bounty" class="mx-2">Bounty Claimed</label>
-                                    <input type="checkbox" name="bounty" value="1" onChange={handleBounty} class="mx-1"/>
+                                    <input type="checkbox" name="bounty" value="1" onChange={handleBounty} class="mx-1" />
+                                </div>
+                                <div>
+                                    <label htmlFor="pentakill"> Pentakill</label>
+                                    <input type="checkbox" name="pentakill" value="0" onChange={showPentakill}></input>
                                 </div>
                             </div>
                         </div>
@@ -190,8 +205,9 @@ const AddPlayers = () => {
                                     })}
                                 </table>
                             </div>
+                            <div><Pentakill showPentakill={showPentakill}></Pentakill></div>
                         </div> </div> : <div> Loading </div>}
-                <button type='submit'class="btn btn-primary"> Submit </button>
+                <button type='submit' class="btn btn-primary"> Submit </button>
             </form>
         </div>
     )
