@@ -18,7 +18,7 @@ const GetBounty = () =>{
         <div>{bounty == ""? <a class="icon-link icon-link-hover" onClick={handleBounty}>
         Get Bounty
         <svg class="bi" aria-hidden="true"></svg>
-        </a>  : <p onClick={handleBounty}> Bounty: {bounty}</p>}</div>
+        </a>  : <p onClick={handleBounty} class="text-info" > Bounty: {bounty}</p>}</div>
     )
 }
 

@@ -33,8 +33,8 @@ const SeasonCountdown = () => {
         <div >
             {/* <h2>{timer}</h2> */}
             <div class="d-flex justify-content-center">
-                <p class="mx-2 fw-bold">Season Ends: </p>
-                <p id="demo"></p>
+                <p class="mx-2 fw-bold text-primary-emphasis">Season Ends: </p>
+                <p id="demo" class="text-warning-emphasis"></p>
             </div>
             {/* <button onClick={onClickReset}>Reset</button> */}
         </div>

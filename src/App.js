@@ -11,7 +11,7 @@ import MatchHistory from './Components/MatchHistory';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-bs-theme="dark">
       <NavBar></NavBar>
       <Routes>
         <Route path='/' element={<Leaderboard/>}/>

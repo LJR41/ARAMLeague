@@ -21,33 +21,36 @@ const NavBar = () => {
         navigate(`/view/player/${e.target.value}`)
     }
 
+    const handleNavigate = (e) => {
+        navigate(`/${e.target.id}`)
+    }
 
     return (
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">ARAM League</a>
+                <a class="navbar-brand text-primary" onClick={handleNavigate} id="" href="javascript:void(0)" >ARAM League</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <li class="nav-item ">
+                            <a class="nav-link active text-warning-emphasis" aria-current="page" onClick={handleNavigate} id="" href="javascript:void(0)">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Register Player</a>
+                            <a class="nav-link text-warning-emphasis" onClick={handleNavigate} id="register" href="javascript:void(0)">Register Player</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/new/match">Register Match</a>
+                            <a class="nav-link text-warning-emphasis " onClick={handleNavigate} id="new/match" href="javascript:void(0)">Register Match</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/view/match">Match History</a>
+                            <a class="nav-link text-warning-emphasis" onClick={handleNavigate} id="view/match" href="javascript:void(0)">Match History</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Rules</a>
+                            <a class="nav-link text-warning-emphasis" href="javascript:void(0)">Rules</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-warning-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 View Player
                             </a>
                             <ul class="dropdown-menu">
