@@ -22,6 +22,7 @@ const AddPlayers = () => {
     const [onFire, setOnFire] = useState(false)
     const [bounty, setBounty] = useState(false)
     const[pentaKill, setPentakill] = useState(false)
+    const [testState, setTestState] = useState("From Parent")
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users')
@@ -131,6 +132,10 @@ const AddPlayers = () => {
         }
     }
 
+    const neededInfo = ()=>{
+        return {test: "test"}
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -205,7 +210,7 @@ const AddPlayers = () => {
                                     })}
                                 </table>
                             </div>
-                            <div><Pentakill showPentakill={showPentakill}></Pentakill></div>
+                            { pentaKill?<div class="row"><Pentakill allUser={allUser}></Pentakill> </div>: null }
                         </div> </div> : <div> Loading </div>}
                 <button type='submit' class="btn btn-primary"> Submit </button>
             </form>
