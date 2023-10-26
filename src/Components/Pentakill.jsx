@@ -22,8 +22,8 @@ const Pentakill = (props) => {
 
     const handlePentaKiller = (e) => {
         setPentaKiller({
-            penta_killer: e.target.value,
-            id: e.target.id
+            winner_name: e.target.value,
+            _id: e.target.id
         })
         setPentaLoser([{}])
     }
@@ -31,11 +31,21 @@ const Pentakill = (props) => {
     const handlePentaLoser = (e) => {
         setPentaLoser([
             ...pentaLoser,
-            { penta_loser: e.target.value, id: e.target.id }])
+            { loser_name: e.target.value, _id: e.target.id }])
+    }
+
+    const sendPenta = (e) => {
+        e.preventDefault()
+        props.neededInfo({pentaKiller, pentaLoser})
+        let button = document.getElementById('penta_submit')
+        button.innerHTML = 'Locked In'
+        button.classList.remove("btn-danger")
+        button.classList.add("btn-success")
+        button.setAttribute("disabled", "")
     }
     return (
         <div>
-            <form action="">
+            <form >
                 <div>
                     <div>
                         <h4>PentaKiller</h4>
@@ -82,6 +92,8 @@ const Pentakill = (props) => {
                         </div>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-danger" id="penta_submit" onClick={sendPenta}>Lock In Penta</button>
+
             </form>
 
         </div>

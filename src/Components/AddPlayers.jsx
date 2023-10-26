@@ -22,7 +22,8 @@ const AddPlayers = () => {
     const [onFire, setOnFire] = useState(false)
     const [bounty, setBounty] = useState(false)
     const[pentaKill, setPentakill] = useState(false)
-    const [testState, setTestState] = useState("From Parent")
+    const [pentaKiller, setPentaKiller] = useState()
+    const [pentaLoser, setPentaLoser] = useState()
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/users')
@@ -111,6 +112,22 @@ const AddPlayers = () => {
                     navigate('/')
                 }
             })
+        if(pentaKill){
+            axios.post('http://localhost:8000/api/earnings',{latestMatch, amountLost: 1, matchWinner: pentaKiller, matchLoser: pentaLoser})
+            .then(res => {
+                console.log(res)
+                if (res.data.errors) {
+                    setErrors(res.data.errors)
+                }
+            })
+            axios.post('http://localhost:8000/api/pentakill',{latestMatch, display_name: pentaKiller.winner_name, id:pentaKiller._id})
+            .then(res => {
+                console.log(res)
+                if (res.data.errors) {
+                    setErrors(res.data.errors)
+                }
+            })
+        }
     }
     const handleBounty = (e) => {
         if (!bounty) {
@@ -132,8 +149,9 @@ const AddPlayers = () => {
         }
     }
 
-    const neededInfo = ()=>{
-        return {test: "test"}
+    const neededInfo = (pentaInfo)=>{
+        setPentaKiller(pentaInfo.pentaKiller)
+        setPentaLoser(pentaInfo.pentaLoser)
     }
 
     return (
@@ -210,7 +228,7 @@ const AddPlayers = () => {
                                     })}
                                 </table>
                             </div>
-                            { pentaKill?<div class="row"><Pentakill allUser={allUser}></Pentakill> </div>: null }
+                            { pentaKill?<div class="row my-2"><Pentakill allUser={allUser} neededInfo={neededInfo}></Pentakill> </div>: null }
                         </div> </div> : <div> Loading </div>}
                 <button type='submit' class="btn btn-primary"> Submit </button>
             </form>
