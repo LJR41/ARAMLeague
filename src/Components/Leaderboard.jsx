@@ -3,6 +3,7 @@ import axios, { all } from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import MatchHistory from './MatchHistory'
 import TopDamage from './TopDamage'
+import PentaLeaders from './PentaLeaders'
 
 const Leaderboard = () => {
     const { id } = useParams()
@@ -87,7 +88,8 @@ const Leaderboard = () => {
                     </tbody>
                 </table></div> : <div>Loading....</div>}
             </div>
-            <div><TopDamage></TopDamage></div>
+            <div><TopDamage></TopDamage>
+            <PentaLeaders></PentaLeaders></div>
         </div>
     )
 }
