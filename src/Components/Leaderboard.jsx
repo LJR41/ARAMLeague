@@ -9,6 +9,7 @@ const Leaderboard = () => {
     const { id } = useParams()
     const [allUser, setAllUser] = useState()
     const [leaderboardData, setLeaderboardData] = useState([{}])
+    const [pentaLeaders, setPentaLeaders] = useState()
 
     useEffect(() => {
         async function getEarningsData(id) {
@@ -61,6 +62,11 @@ const Leaderboard = () => {
             .catch(err => console.log(err))
 
     }, [])
+
+    const pentaAmt = (pentaAmt) =>{
+        console.log(pentaAmt)
+        setPentaLeaders(pentaAmt)
+    }
     return (
         <div class="row d-flex justify-content-center">
             <div class='col-4'>
@@ -88,8 +94,8 @@ const Leaderboard = () => {
                     </tbody>
                 </table></div> : <div>Loading....</div>}
             </div>
-            <div><TopDamage></TopDamage>
-            <PentaLeaders></PentaLeaders></div>
+            <div class="d-flex justify-content-evenly"><TopDamage></TopDamage>
+            <PentaLeaders pentaAmt ={pentaAmt}></PentaLeaders></div>
         </div>
     )
 }

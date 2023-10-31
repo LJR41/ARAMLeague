@@ -19,7 +19,7 @@ const TopDamage = () => {
 
 return (
     <div class="row d-flex justify-content-center">
-        <div class='col-6'>
+        <div >
             <div><h4 class="mt-3">Top Single Game Damage</h4></div>
             <div>
                 <table class="table table-sm table-secondary table-bordered">
