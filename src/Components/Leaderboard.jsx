@@ -48,15 +48,20 @@ const Leaderboard = () => {
 
         axios.get('http://localhost:8000/api/users')
             .then(response => {
-                console.log("1")
                 let orderedData = []
                 for (let i = 0; i < response.data.length; i++) {
                     getEarningsData(response.data[i]._id)
                         .then(res => {
+                            // Push res object into our State array
                             setLeaderboardData(leaderboardData => [
-                                ...leaderboardData.sort(function(a, b) {return b.earnings - a.earnings}), res
+                                ...leaderboardData, res
+                            ])
+                            // Sort our state
+                            setLeaderboardData(leaderboardData => [
+                                ...leaderboardData.sort(function(a, b) {return b.earnings - a.earnings})
                             ])
                         })
+                        
                 }
             })
             .catch(err => console.log(err))

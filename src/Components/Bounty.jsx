@@ -18,8 +18,18 @@ const GetBounty = () =>{
     const handleBounty = (e) => {
         axios.get('http://localhost:8000/api/random/bounty')
             .then(res => {
-                let randomInt = Math.floor(Math.random() * (res.data.length - 0))
-                return res.data[randomInt].champion_name
+                let bountyNames = []
+                for(let i = 0; i < 3; i++){
+                    let randomInt = Math.floor(Math.random() * (res.data.length - 0))
+                    if(i < 2){
+                        bountyNames.push(res.data[randomInt].champion_name + ", ")
+                    }
+                    else{
+                        bountyNames.push(res.data[randomInt].champion_name)
+                    }
+                    
+                }
+                return bountyNames.join('')
                 
             })
             .then( res =>
