@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Welcome to the ARAM League
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My friends and I have been playing the popular MOBA League of Legends for over a decade. Even now in our early 30's we find time to play alongside each other, but we want to keep our competitive edge.
+Enter the ARAM League, a web-app I built to track our stats in a 'fantasy-football-league' type of way. The short of it is, we play ARAM(All Random All Mid) and whomever deals the most damage in the game wins
+a small amount of coin from the other players! There are caveats, such as if our team wins or losses, if they bounty was hit, or the winner is On Fire. 
 
-## Available Scripts
+At the beginning of this 2nd season of our ARAM League (the first season ending with a players wedding and proceeds going to the festivities), I took it upon myself to become League Commissioner and take our League
+into the next era with a well developed and intricate web-app to keep track of our statistics. Last season was done over an Excel sheet and was a debaucle settling up the weekend of the wedding. With our newly developed ARAM League app
+we're able to easily see and quantify the leaders in the League with a simple few clicks.
 
-In the project directory, you can run:
+## How it Works
 
-### `npm start`
+The bread and butter of this app is how the relationships between users, matches, money earned and lost all work with each other. Creating a match, recording the data and selecting the users is the easy 3 step process to add data to the back-end. The front-end is loaded to handle most of the unique situations that can occur in our league on any given match. This data is then stored on a local server, then called again to the front-end where most of the heavy lifting is done to display the data in an efficient and easy way for all players to understand.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> * Create and add users to the database
+> * Record matches, data and assign players, 
+> * Live updates of earnings and data from player-to-player
+> * View match history, showing winner and damage dealt.
+> * Save those you deem worthy to your ever-growing collection of lists
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Roadmap`
+- [X] v1.0 repo uploaded
+- [ ] Match History pagination
+- [ ] Front-end Delete functionallity for mistakes or errors
+- [ ] In-Depth Match history
+- [ ] Code Optimization for readability
+- [ ] Rules section added
+- [ ] CSS/Styling
+- [ ] League MVP/ End of Season rewards
 
-### `npm run build`
+# Live Demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Live Demo coming soon!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## The Building Blocks
+* MySQL
+* Express
+* REACT
+* Node.js
+* Bootstrap
+* Axios
+* Nodemon
+  
+# Contact
+- Lauro Joshua Remulla
+   - Full Stack Dev
+   - [My LinkedIn](https://www.linkedin.com/in/josh-remulla16/)
