@@ -35,7 +35,7 @@ The bread and butter of this app is how the relationships between users, matches
 
 Live Demo coming soon!
 
-## The Building Blocks
+## The Building Blocks and Credits
 * MySQL
 * Express
 * REACT
@@ -43,6 +43,9 @@ Live Demo coming soon!
 * Bootstrap
 * Axios
 * Nodemon
+    ________________________________________________
+
+  * [Traversy Media](https://www.youtube.com/watch?v=IYCa1F-OWmk&t=221s) - Pagination Tutorial
   
 # Contact
 - Lauro Joshua Remulla
