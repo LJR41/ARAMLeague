@@ -18,7 +18,6 @@ The bread and butter of this app is how the relationships between users, matches
 > * Record matches, data and assign players, 
 > * Live updates of earnings and data from player-to-player
 > * View match history, showing winner and damage dealt.
-> * Save those you deem worthy to your ever-growing collection of lists
 
 
 ### `Roadmap`
