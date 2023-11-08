@@ -20,13 +20,13 @@ const SeasonCountdown = () => {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        document.getElementById("timer").innerHTML = days + "d " + hours + "h "
             + minutes + "m " + seconds + "s ";
 
         // If the count down is finished, write some text
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
+            document.getElementById("timer").innerHTML = "EXPIRED";
         }
     }, 1000);
     return (
@@ -34,7 +34,7 @@ const SeasonCountdown = () => {
             {/* <h2>{timer}</h2> */}
             <div class="d-flex justify-content-center">
                 <p class="mx-2 fw-bold text-primary-emphasis">Season Ends: </p>
-                <p id="demo" class="text-warning-emphasis"></p>
+                <p id="timer" class="text-warning-emphasis"></p>
             </div>
             {/* <button onClick={onClickReset}>Reset</button> */}
         </div>

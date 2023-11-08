@@ -1,49 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
+import Matches from './Matches'
+import PaginateButtons from './PaginateButtons'
 
 const MatchHistory = () => {
-    const [allMatches, setAllMatches] = useState()
-    useEffect(() => {
+    const [matches, setMatches] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [matchesPerPage] = useState(10)
 
-        axios.get('http://localhost:8000/api/all/match')
-            .then(response => {
-                console.log(response.data)
-                setAllMatches(response.data)
-            })
-            .catch(err => console.log(err))
+    useEffect(() => {
+        const fetchMatches = async () => {
+            console.log("Here")
+            setLoading(true)
+            const res = await axios.get('http://localhost:8000/api/all/match')
+            setMatches(res.data)
+            setLoading(false)
+            
+        }
+
+        fetchMatches()
+
     }, [])
 
+    console.log(matches)
+    //Get current matches
+    const indexOfLastMatch = currentPage * matchesPerPage
+    const indexOfFirstMatch = indexOfLastMatch - matchesPerPage
+    const currentMatches = matches.slice(indexOfFirstMatch, indexOfLastMatch)
+
+    //Change Page
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
-        <div>
-            <div class="mt-4">
-                {allMatches ?
-                    <table class="table table-sm table-secondary table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Match #</th>
-                                <th scope="col">Winner</th>
-                                <th scope="col">Champion</th>
-                                <th scope="col">Damage Dealt</th>
-                                <th scope="col">Team Result</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {allMatches.map((eachMatch, Idx) =>{
-                                return(
-                                    <tr>
-                                <th scope="row">{eachMatch.match_id}</th>
-                                <td>{eachMatch.display_name}</td>
-                                <td>{eachMatch.champion_name}</td>
-                                <td>{eachMatch.damage_dealt}</td>
-                                <td>{eachMatch.team_result == 0? <p>L</p> : <p>W</p>}</td>
-                            </tr>
-                                )
-                            })}
-                            
-                        </tbody>
-                    </table> : <div>Loading...</div>}
-            </div>
+        <div class='row d-flex justify-content-center'>
+            {matches ? <div class='col-4 my-4'>
+
+                <Matches matches={currentMatches} loading={loading}></Matches>
+                <div class='d-flex justify-content-center'>
+                    <PaginateButtons matchesPerPage={matchesPerPage} totalMatches={matches.length} paginate={paginate}></PaginateButtons>
+                </div>
+            </div> : <h1>Loading....</h1>}
         </div>
     )
 }
