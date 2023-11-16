@@ -23,9 +23,11 @@ The bread and butter of this app is how the relationships between users, matches
 ### `Roadmap`
 - [X] v1.0 repo uploaded
 - [X] Match History pagination
+- [ ] Login / Reg
+- [ ] Admin Priveleges
 - [ ] Front-end Delete functionallity for mistakes or errors
 - [ ] In-Depth Match history
-- [ ] Code Optimization for readability
+- [ ] Code refactor for readability
 - [ ] Rules section added
 - [ ] CSS/Styling
 - [ ] League MVP/ End of Season rewards
