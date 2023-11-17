@@ -18,15 +18,16 @@ The bread and butter of this app is how the relationships between users, matches
 > * Record matches, data and assign players, 
 > * Live updates of earnings and data from player-to-player
 > * View match history, showing winner and damage dealt.
-> * Save those you deem worthy to your ever-growing collection of lists
 
 
 ### `Roadmap`
 - [X] v1.0 repo uploaded
-- [ ] Match History pagination
+- [X] Match History pagination
+- [ ] Login / Reg
+- [ ] Admin Priveleges
 - [ ] Front-end Delete functionallity for mistakes or errors
 - [ ] In-Depth Match history
-- [ ] Code Optimization for readability
+- [ ] Code refactor for readability
 - [ ] Rules section added
 - [ ] CSS/Styling
 - [ ] League MVP/ End of Season rewards
@@ -35,7 +36,7 @@ The bread and butter of this app is how the relationships between users, matches
 
 Live Demo coming soon!
 
-## The Building Blocks
+## The Building Blocks and Credits
 * MySQL
 * Express
 * REACT
@@ -43,6 +44,9 @@ Live Demo coming soon!
 * Bootstrap
 * Axios
 * Nodemon
+    ________________________________________________
+
+  * [Traversy Media](https://www.youtube.com/watch?v=IYCa1F-OWmk&t=221s) - Pagination Tutorial
   
 # Contact
 - Lauro Joshua Remulla
