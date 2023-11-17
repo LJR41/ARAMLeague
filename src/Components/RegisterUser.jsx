@@ -23,7 +23,7 @@ const RegisterUser  = () => {
     const onSubmit =(e) => {
         e.preventDefault()
         console.log(formInfo)
-        axios.post('http://localhost:8000/api/register', formInfo)
+        axios.post('http://localhost:8000/api/register/player', formInfo)
         .then(res => {
             console.log(res)
             if(res.data.errors){

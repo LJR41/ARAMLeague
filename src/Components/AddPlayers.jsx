@@ -26,7 +26,7 @@ const AddPlayers = () => {
     const [pentaLoser, setPentaLoser] = useState()
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users')
+        axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
         axios.get('http://localhost:8000/api/get/match')

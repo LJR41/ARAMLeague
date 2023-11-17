@@ -10,7 +10,7 @@ const NavBar = () => {
     const [allUser, setAllUser] = useState()
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users')
+        axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
 
@@ -47,7 +47,7 @@ const NavBar = () => {
                             <a class="nav-link text-warning-emphasis" onClick={handleNavigate} id="view/match" href="javascript:void(0)">Match History</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-warning-emphasis" href="javascript:void(0)">Rules</a>
+                            <a class="nav-link text-warning-emphasis" href="javascript:void(0)" onClick={handleNavigate} id="rules">Rules</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-warning-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

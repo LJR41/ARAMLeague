@@ -46,7 +46,7 @@ const Leaderboard = () => {
         }
 
 
-        axios.get('http://localhost:8000/api/users')
+        axios.get('http://localhost:8000/api/players')
             .then(response => {
                 let orderedData = []
                 for (let i = 0; i < response.data.length; i++) {
