@@ -11,7 +11,6 @@ const TopDamage = () => {
         axios.get('http://localhost:8000/api/damage/')
             .then(res => {
                 setDamageLeaderboard(res.data.sort(function (a, b) { return b.damage_dealt - a.damage_dealt }))
-                console.log(res)
             })
             .catch(err => console.log(err))
 

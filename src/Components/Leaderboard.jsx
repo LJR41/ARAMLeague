@@ -69,7 +69,6 @@ const Leaderboard = () => {
     }, [])
 
     const pentaAmt = (pentaAmt) =>{
-        console.log(pentaAmt)
         setPentaLeaders(pentaAmt)
     }
     return (

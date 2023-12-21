@@ -9,7 +9,6 @@ const PentaLeaders = (props) => {
 
         axios.get('http://localhost:8000/api/view/penta')
             .then(res => {
-                console.log(res.data)
                 let pentaLeaders = []
                 for (const i of res.data) {
                     let tempObj = {}
@@ -17,16 +16,15 @@ const PentaLeaders = (props) => {
                     tempObj.penta_amt = 1
                     pentaLeaders.push(tempObj)
                 }
-                
-                for (let i = 0; i <= pentaLeaders.length; i++) {
-                    for (let j = i + 1; j < pentaLeaders.length; j++) {
+                for (let i = 0; i <= pentaLeaders.length-1; i++) {
+                    for (let j = i + 1; j <= pentaLeaders.length-1; j++) {
                         if (pentaLeaders[i].display_name == pentaLeaders[j].display_name) {
                             pentaLeaders.splice(j, 1)
                             pentaLeaders[i].penta_amt += 1
+                            j -= 1
                         }
                     }
                 }
-                console.log(pentaLeaders)
                 setPentaLeaders(pentaLeaders.sort(function (a, b) { return b.penta_amt - a.penta_amt }))
                 props.pentaAmt(pentaLeaders)
             })
