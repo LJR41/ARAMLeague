@@ -7,7 +7,7 @@ const AddPlayers = () => {
     const [allUser, setAllUser] = useState([])
     const [latestMatch, setLatestMatch] = useState()
     const navigate = useNavigate()
-    const [amountLost, setAmountLost] = useState(.50)
+    const [amountLost, setAmountLost] = useState(1)
     const loserAmount = [0, 1, 2, 3]
     const [matchWinner, setMatchWinner] = useState({
         winner_name: "",
@@ -33,7 +33,7 @@ const AddPlayers = () => {
             .then(response => {
                 setLatestMatch(response.data)
                 if (response.data[0].team_result == 1) {
-                    setAmountLost(1)
+                    setAmountLost(2)
                 }
             })
             .catch(err => console.log(err))
