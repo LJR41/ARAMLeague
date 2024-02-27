@@ -50,18 +50,18 @@ const ViewPlayer = () => {
 
     const handleEarningsBreakdown = async (e) => {
         
-        
+        // Send response to backend, finding games where viewPlayer has won and comparePlayer has lost
         let response = await axios.post('http://localhost:8000/api/compare/player', {comparePlayer:{viewPlayerId: onePlayer[0]._id, comparePlayerId: e.target.id}})
         let viewPlayerEarnings = 0
-        console.log(response)
+        // set compare player state here, because players with 0 wins will not pass if conditional on line 59
         setComparePlayerUser(e.target.value)
         if(response.data.length > 0){
-            
             for(let i = 0; i< response.data.length; i ++){
                 viewPlayerEarnings += response.data[i].amount_owed
             }
         }
 
+        // send response to backend, finding where comparePlayer has won and viewPlayer has lost
         let flippedResponse = await axios.post('http://localhost:8000/api/compare/player', {comparePlayer:{viewPlayerId: e.target.id, comparePlayerId: onePlayer[0]._id}})
         let comparePlayerEarnings = 0
         if(flippedResponse.data.length > 0){
@@ -70,6 +70,7 @@ const ViewPlayer = () => {
             }
         }
 
+        // set earnings to viewPlayer earnings minus comparePlayer earnings
         setComparePlayerEarnings(viewPlayerEarnings - comparePlayerEarnings)
     }
 

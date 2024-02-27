@@ -14,7 +14,8 @@ const AddPlayers = () => {
         _id: null,
         user_result: null
     })
-    const [matchLoser, setMatchLoser] = useState([{}])
+    const [matchLoser, setMatchLoser] = useState([{
+    }])
     const [errors, setErrors] = useState({
     })
     const [winnerDataChampion, setWinnerDataChampion] = useState("")
@@ -51,12 +52,23 @@ const AddPlayers = () => {
         })
         setMatchLoser([{}])
     }
+    function checkQueso(string){
+        console.log(string)
+        if(string.loser_name === 'Queso'){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+
 
     const handleLoser = (e) => {
         setMatchLoser([
             ...matchLoser,
             { loser_name: e.target.value, _id: e.target.id, user_result: 0 }
         ])
+        console.log(matchLoser.filter(checkQueso))
     }
 
     const handleChampion = (e) => {
@@ -216,7 +228,7 @@ const AddPlayers = () => {
                                                         <option value="" hidden>Select a Player</option>
                                                         {allUser.map((eachUser, Idx) => {
                                                             return (
-                                                                !Object.values(matchWinner).indexOf(eachUser.display_name) ? <option value={eachUser.display_name} id={eachUser._id} disabled >{eachUser.display_name}</option> :
+                                                                !Object.values(matchWinner).indexOf(eachUser.display_name) || matchLoser.filter(checkQueso) ? <option value={eachUser.display_name} id={eachUser._id} disabled >{eachUser.display_name}</option> :
                                                                     <option value={eachUser.display_name} id={eachUser._id} onClick={handleLoser}>{eachUser.display_name}</option>
                                                             )
                                                         })}
