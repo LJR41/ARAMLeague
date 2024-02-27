@@ -54,9 +54,9 @@ const ViewPlayer = () => {
         let response = await axios.post('http://localhost:8000/api/compare/player', {comparePlayer:{viewPlayerId: onePlayer[0]._id, comparePlayerId: e.target.id}})
         let viewPlayerEarnings = 0
         console.log(response)
+        setComparePlayerUser(e.target.value)
         if(response.data.length > 0){
             
-            setComparePlayerUser(response.data[0].display_name)
             for(let i = 0; i< response.data.length; i ++){
                 viewPlayerEarnings += response.data[i].amount_owed
             }
