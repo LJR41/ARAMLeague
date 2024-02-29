@@ -9,13 +9,14 @@ const AddPlayers = () => {
     const navigate = useNavigate()
     const [amountLost, setAmountLost] = useState(1)
     const loserAmount = [0, 1, 2, 3]
+    
     const [matchWinner, setMatchWinner] = useState({
         winner_name: "",
         _id: null,
         user_result: null
     })
-    const [matchLoser, setMatchLoser] = useState([{
-    }])
+    const [matchLoser, setMatchLoser] = useState([{}])
+    const [loserList, setLoserList] = useState([])
     const [errors, setErrors] = useState({
     })
     const [winnerDataChampion, setWinnerDataChampion] = useState("")
@@ -50,7 +51,7 @@ const AddPlayers = () => {
             _id: e.target.id,
             user_result: 1
         })
-        setMatchLoser([{}])
+        setMatchLoser([])
     }
     function checkQueso(string){
         console.log(string)
@@ -68,7 +69,8 @@ const AddPlayers = () => {
             ...matchLoser,
             { loser_name: e.target.value, _id: e.target.id, user_result: 0 }
         ])
-        console.log(matchLoser.filter(checkQueso))
+        setLoserList([...loserList,e.target.value])
+        console.log(loserList)
     }
 
     const handleChampion = (e) => {
@@ -228,7 +230,7 @@ const AddPlayers = () => {
                                                         <option value="" hidden>Select a Player</option>
                                                         {allUser.map((eachUser, Idx) => {
                                                             return (
-                                                                !Object.values(matchWinner).indexOf(eachUser.display_name) || matchLoser.filter(checkQueso) ? <option value={eachUser.display_name} id={eachUser._id} disabled >{eachUser.display_name}</option> :
+                                                                !Object.values(matchWinner).indexOf(eachUser.display_name) || loserList.indexOf(eachUser.display_name) != -1 ? <option value={eachUser.display_name} id={eachUser._id} disabled >{eachUser.display_name}</option> :
                                                                     <option value={eachUser.display_name} id={eachUser._id} onClick={handleLoser}>{eachUser.display_name}</option>
                                                             )
                                                         })}
