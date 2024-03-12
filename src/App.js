@@ -14,7 +14,7 @@ import Rules from './Components/Rules';
 function App() {
   return (
     <div className="App" data-bs-theme="dark">
-      <NavBar></NavBar>
+      {<NavBar></NavBar>}
       <Routes>
         <Route path='/' element={<Leaderboard/>}/> 
         <Route path='/register/new' element={<Register/>}/>

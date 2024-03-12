@@ -1,45 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
+import { getEarningsData } from '../data/utils'
 
 const ViewPlayer = () => {
     const { id } = useParams()
     const [allUser, setAllUser] = useState()
     const [onePlayer, setOnePlayer] = useState()
-    const [playerEarnings, setPlayerEarnings] = useState(0)
-    const [playerWins, setPlayerWins] = useState(0)
-    const [playerLoss, setPlayerLoss] = useState(0)
+    const [playerData, setPlayerData] = useState({
+        earnings: 0,
+        wins: 0,
+        losses: 0
+    })
     const [comparePlayerEarnings, setComparePlayerEarnings] = useState(0)
     const [comparePlayerUser, setComparePlayerUser] = useState()
+    const [earningsData, setEarningsData] = useState()
 
     useEffect(() => {
-        async function getEarningsData(id) {
-            let winResponse = await axios.get(`http://localhost:8000/api/win/${id}`)
-            let winTotal = 0
-            let matchesWon = []
-            for (let i = 0; i < winResponse.data.length; i++) {
-                let matchWinnings = winResponse.data[i].amount_owed
-                if (!matchesWon.includes(winResponse.data[i].match_id)) {
-                    matchesWon.push(winResponse.data[i].match_id)
-                }
-                winTotal += matchWinnings
-            }
-            let lossResponse = await axios.get(`http://localhost:8000/api/loss/${id}`)
-            let lossTotal = 0
-            let matchesLost = []
-            for (let i = 0; i < lossResponse.data.length; i++) {
-                let matchLoss = lossResponse.data[i].amount_owed
-                if (!matchesLost.includes(lossResponse.data[i].match_id)) {
-                    matchesLost.push(lossResponse.data[i].match_id)
-                }
-                lossTotal += matchLoss
-            }
-            setPlayerEarnings(winTotal - lossTotal)
-            setPlayerWins(matchesWon.length)
-            setPlayerLoss(matchesLost.length)
-        }
         getEarningsData(id)
-
+            .then(data => setPlayerData({
+                earnings: data.earnings,
+                wins: data.wins,
+                losses: data.losses
+            }))
         axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
@@ -49,23 +32,22 @@ const ViewPlayer = () => {
     }, [id])
 
     const handleEarningsBreakdown = async (e) => {
-        
         // Send response to backend, finding games where viewPlayer has won and comparePlayer has lost
-        let response = await axios.post('http://localhost:8000/api/compare/player', {comparePlayer:{viewPlayerId: onePlayer[0]._id, comparePlayerId: e.target.id}})
+        let response = await axios.post('http://localhost:8000/api/compare/player', { comparePlayer: { viewPlayerId: onePlayer[0]._id, comparePlayerId: e.target.id } })
         let viewPlayerEarnings = 0
         // set compare player state here, because players with 0 wins will not pass if conditional on line 59
         setComparePlayerUser(e.target.value)
-        if(response.data.length > 0){
-            for(let i = 0; i< response.data.length; i ++){
+        if (response.data.length > 0) {
+            for (let i = 0; i < response.data.length; i++) {
                 viewPlayerEarnings += response.data[i].amount_owed
             }
         }
 
         // send response to backend, finding where comparePlayer has won and viewPlayer has lost
-        let flippedResponse = await axios.post('http://localhost:8000/api/compare/player', {comparePlayer:{viewPlayerId: e.target.id, comparePlayerId: onePlayer[0]._id}})
+        let flippedResponse = await axios.post('http://localhost:8000/api/compare/player', { comparePlayer: { viewPlayerId: e.target.id, comparePlayerId: onePlayer[0]._id } })
         let comparePlayerEarnings = 0
-        if(flippedResponse.data.length > 0){
-            for(let i = 0; i< flippedResponse.data.length; i ++){
+        if (flippedResponse.data.length > 0) {
+            for (let i = 0; i < flippedResponse.data.length; i++) {
                 comparePlayerEarnings += flippedResponse.data[i].amount_owed
             }
         }
@@ -82,8 +64,8 @@ const ViewPlayer = () => {
                         <h4 class="card-title fw-bold">{onePlayer[0].display_name}</h4>
                         <h5 class="card-subtitle mb-2 text-body-secondary  ">{onePlayer[0].first_name} {onePlayer[0].last_name}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary fw-bold"> W - L  </h6>
-                        <h6 class="card-subtitle mb-2 text-body-secondary "> {playerWins} - {playerLoss}</h6>
-                        <h6 class="card-subtitle mb-2 text-body-secondary "> <p class="text-decoration-underline fw-bold">Earnings</p> {playerEarnings > 0?  <p class="text-success">${playerEarnings}</p> : <p class="text-danger">-${playerEarnings * -1}</p>}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary "> {playerData.wins} - {playerData.losses}</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary "> <p class="text-decoration-underline fw-bold">Earnings</p> {playerData.earnings > 0 ? <p class="text-success">${playerData.earnings}</p> : <p class="text-danger">-${playerData.earnings * -1}</p>}</h6>
                         <p class="card-text">Select a Player to see earnings breakdown.</p>
                         <div>
                             <div>
@@ -97,7 +79,7 @@ const ViewPlayer = () => {
                                     })}
                                 </select>
                             </div>
-                            <div class="mt-4">{comparePlayerEarnings? <div>{comparePlayerEarnings > 0? <div>{comparePlayerUser} owes {onePlayer[0].display_name} <div><p class="text-success">${comparePlayerEarnings}</p></div></div>:<div>{onePlayer[0].display_name} owes {comparePlayerUser} <div><p class="text-danger">${comparePlayerEarnings * -1}</p></div> </div>}</div>: <h6></h6>}</div>
+                            <div class="mt-4">{comparePlayerEarnings ? <div>{comparePlayerEarnings > 0 ? <div>{comparePlayerUser} owes {onePlayer[0].display_name} <div><p class="text-success">${comparePlayerEarnings}</p></div></div> : <div>{onePlayer[0].display_name} owes {comparePlayerUser} <div><p class="text-danger">${comparePlayerEarnings * -1}</p></div> </div>}</div> : <h6></h6>}</div>
                         </div>
                     </div>
                 </div> : <div><h3>Loading...</h3></div>

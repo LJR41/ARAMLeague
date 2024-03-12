@@ -39,9 +39,6 @@ const AddPlayers = () => {
                 }
             })
             .catch(err => console.log(err))
-
-
-
     }, [])
 
     const handleWinner = (e) => {
@@ -53,16 +50,6 @@ const AddPlayers = () => {
         })
         setMatchLoser([])
     }
-    function checkQueso(string){
-        console.log(string)
-        if(string.loser_name === 'Queso'){
-            return true
-        }
-        else{
-            return false
-        }
-    }
-
 
     const handleLoser = (e) => {
         setMatchLoser([
@@ -153,7 +140,6 @@ const AddPlayers = () => {
             setAmountLost(amountLost - .5)
         }
     }
-
     const showPentakill = () =>{
         if(!pentaKill){
             setPentakill(true)
@@ -162,12 +148,10 @@ const AddPlayers = () => {
             setPentakill(false)
         }
     }
-
     const neededInfo = (pentaInfo)=>{
         setPentaKiller(pentaInfo.pentaKiller)
         setPentaLoser(pentaInfo.pentaLoser)
     }
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
