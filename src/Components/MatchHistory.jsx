@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
-import { useNavigate, Link, useParams } from 'react-router-dom'
 import Matches from './Matches'
 import PaginateButtons from './PaginateButtons'
 
@@ -12,7 +11,6 @@ const MatchHistory = () => {
 
     useEffect(() => {
         const fetchMatches = async () => {
-            console.log("Here")
             setLoading(true)
             const res = await axios.get('http://localhost:8000/api/all/match')
             setMatches(res.data)

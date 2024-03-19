@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
-import MatchHistory from './MatchHistory'
-import TopDamage from './TopDamage'
-import PentaLeaders from './PentaLeaders'
 import { getEarningsData } from '../data/utils'
 
 
 const Leaderboard = () => {
-    const { id } = useParams()
-    const [allUser, setAllUser] = useState()
     const [leaderboardData, setLeaderboardData] = useState([{}])
-    const [pentaLeaders, setPentaLeaders] = useState()
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/players')
             .then(response => {
-                console.log("It works")
                 let orderedData = []
                 for (let i = 0; i < response.data.length; i++) {
                     getEarningsData(response.data[i]._id)
@@ -37,9 +30,6 @@ const Leaderboard = () => {
 
     }, [])
 
-    const pentaAmt = (pentaAmt) =>{
-        setPentaLeaders(pentaAmt)
-    }
     return (
         <div class="row d-flex justify-content-center">
             <div class='col-4'>
@@ -67,8 +57,6 @@ const Leaderboard = () => {
                     </tbody>
                 </table></div> : <div>Loading....</div>}
             </div>
-            <div class="d-flex justify-content-evenly"><TopDamage></TopDamage>
-            <PentaLeaders pentaAmt ={pentaAmt}></PentaLeaders></div>
         </div>
     )
 }
