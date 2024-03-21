@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+let renderCount = 0
+
 const RegisterUser  = () => {
+
+    renderCount++
     const [formInfo, setFormInfo] = useState({
         first_name:"",
         last_name: "",
@@ -39,7 +43,7 @@ const RegisterUser  = () => {
 
     return (
         <div>
-        <h2 >Register A New Player</h2>
+        <h2 >Register A New Player ({renderCount})</h2>
         <form onSubmit={onSubmit}>
             <div>
                 <label >First Name</label>

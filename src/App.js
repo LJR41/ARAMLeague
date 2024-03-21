@@ -10,6 +10,7 @@ import History from './Pages/MatchHistory';
 import Register from './Components/Register';
 import Rules from './Components/Rules';
 import HomePage from './Pages/Home';
+import YoutubeForm from './Components/YoutubeForm';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/view/player/:id' element={<ViewPlayer/>}/>
         <Route path='/view/match' element={<History/>}/>
         <Route path='/rules' element={<Rules/>}/>
+        <Route path='/test' element={<YoutubeForm/>}/>
       </Routes> 
     </div>
   );
