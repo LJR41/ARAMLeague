@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
-import { useNavigate, Link, useParams } from 'react-router-dom'
 import { getEarningsData } from '../data/utils'
 
 

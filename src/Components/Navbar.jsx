@@ -5,7 +5,6 @@ import SeasonCountdown from './SeasonCountdown'
 import GetBounty from './Bounty'
 
 const NavBar = () => {
-    const { id } = useParams()
     const navigate = useNavigate()
     const [allUser, setAllUser] = useState()
 

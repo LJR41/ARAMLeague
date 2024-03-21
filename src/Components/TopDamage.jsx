@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate, Link, useParams } from 'react-router-dom'
 
 const TopDamage = () => {
-    const { id } = useParams()
-    const [allUser, setAllUser] = useState()
     const [damageLeaderboard, setDamageLeaderboard] = useState([{}])
 
     useEffect(() => {
