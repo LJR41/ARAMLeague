@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
+import { auth, app } from '../firebase'
 import Pentakill from './Pentakill'
 
 const AddPlayers = () => {
@@ -28,6 +29,16 @@ const AddPlayers = () => {
     const [pentaLoser, setPentaLoser] = useState()
 
     useEffect(() => {
+            auth.onAuthStateChanged(user => {
+                // if user is NOT null, they are logged in, navigate to dash
+                if (user == null) {
+                    navigate('/')
+                }
+                // if user IS null, navigate to login
+                else if (user != null && user.id !== process.env.REACT_APP_ADMIN_ID){
+                    navigate('/dashboard')
+                }
+            })
         axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
@@ -57,7 +68,6 @@ const AddPlayers = () => {
             { loser_name: e.target.value, _id: e.target.id, user_result: 0 }
         ])
         setLoserList([...loserList,e.target.value])
-        console.log(loserList)
     }
 
     const handleChampion = (e) => {
@@ -82,7 +92,6 @@ const AddPlayers = () => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/add/players', { latestMatch, matchWinner, matchLoser })
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 } else {
@@ -94,7 +103,6 @@ const AddPlayers = () => {
             })
         axios.post('http://localhost:8000/api/earnings', { latestMatch, amountLost, matchWinner, matchLoser })
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 } else {
@@ -106,7 +114,6 @@ const AddPlayers = () => {
             })
         axios.post('http://localhost:8000/api/data', { winnerDataChampion, winnerDataDamage, matchWinner, latestMatch })
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 } else {
@@ -116,14 +123,12 @@ const AddPlayers = () => {
         if(pentaKill){
             axios.post('http://localhost:8000/api/earnings',{latestMatch, amountLost: 1, matchWinner: pentaKiller, matchLoser: pentaLoser})
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 }
             })
             axios.post('http://localhost:8000/api/pentakill',{latestMatch, display_name: pentaKiller.winner_name, id:pentaKiller._id})
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 }

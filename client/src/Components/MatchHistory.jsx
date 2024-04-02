@@ -22,7 +22,6 @@ const MatchHistory = () => {
 
     }, [])
 
-    console.log(matches)
     //Get current matches
     const indexOfLastMatch = currentPage * matchesPerPage
     const indexOfFirstMatch = indexOfLastMatch - matchesPerPage

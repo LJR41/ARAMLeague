@@ -11,12 +11,10 @@ const Leaderboard = () => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/players')
             .then(response => {
-                console.log(response)
                 let orderedData = []
-                for (let i = 0; i < response.data.length; i++) {
+                for (let i = 0; i <= response.data.length; i++) {
                     getEarningsData(response.data[i]._id)
                         .then(res => {
-                            
                             // Push res object into our State array
                             setLeaderboardData(leaderboardData => [
                                 ...leaderboardData, res

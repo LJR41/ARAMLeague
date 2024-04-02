@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
+import { auth } from '../firebase'
 
 const RegisterMatch = (props) => {
     const navigate = useNavigate()
@@ -9,6 +10,16 @@ const RegisterMatch = (props) => {
     })
 
     useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            // if user is NOT null, they are logged in, navigate to dash
+            if (user == null) {
+                navigate('/')
+            }
+            // if user IS null, navigate to login
+            else if (user != null && user.id !== process.env.REACT_APP_ADMIN_ID){
+                navigate('/dashboard')
+            }
+        })
     }, [])
     const handleResult = (e) => {
         setTeamResult(e.target.value)
@@ -18,7 +29,6 @@ const RegisterMatch = (props) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/create/match', {teamResult})
             .then(res => {
-                console.log(res)
                 if (res.data.errors) {
                     setErrors(res.data.errors)
                 } else {

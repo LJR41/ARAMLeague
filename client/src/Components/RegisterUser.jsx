@@ -1,35 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase'
 
-let renderCount = 0
 
 const RegisterUser  = () => {
+    const navigate = useNavigate()
+    useEffect(()=>{
+        auth.onAuthStateChanged(user => {
+            // if user is NOT null, they are logged in, navigate to dash
+            if (user == null) {
+                navigate('/')
+            }
+            // if user IS null, navigate to login
+            else if (user != null && user.id !== process.env.REACT_APP_ADMIN_ID){
+                navigate('/dashboard')
+            }
+        })
+    },[])
 
-    renderCount++
     const [formInfo, setFormInfo] = useState({
         first_name:"",
         last_name: "",
         display_name: "",
     })
-
-    const navigate = useNavigate()
     const [errors, setErrors] = useState({
     })
-
     const changeHandler = (e) => {
         setFormInfo({
             ...formInfo,
             [e.target.name]:e.target.value
         })
     }
-
     const onSubmit =(e) => {
         e.preventDefault()
-        console.log(formInfo)
         axios.post('http://localhost:8000/api/register/player', formInfo)
         .then(res => {
-            console.log(res)
             if(res.data.errors){
                 setErrors(res.data.errors)
             }else{
@@ -43,7 +49,7 @@ const RegisterUser  = () => {
 
     return (
         <div>
-        <h2 >Register A New Player ({renderCount})</h2>
+        <h2 >Register A New Player </h2>
         <form onSubmit={onSubmit}>
             <div>
                 <label >First Name</label>
