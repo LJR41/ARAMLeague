@@ -20,11 +20,14 @@ The bread and butter of this app is how the relationships between users, matches
 > * View match history, showing winner and damage dealt.
 
 
-### `Roadmap`
+## Roadmap
+### Season 2 development underway now!
+
 - [X] v1.0 repo uploaded
 - [X] Match History pagination
-- [ ] Login / Reg
-- [ ] Admin Priveleges
+- [X] Login / Reg
+- [X] Admin Priveleges
+- [ ] Firebase Hosting [ WIP ]
 - [ ] Front-end Delete functionallity for mistakes or errors
 - [ ] In-Depth Match history
 - [ ] Code refactor for readability
