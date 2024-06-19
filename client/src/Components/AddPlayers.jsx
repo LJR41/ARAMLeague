@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate, Link, useParams } from 'react-router-dom'
-import { auth, app } from '../firebase'
+import { useNavigate} from 'react-router-dom'
 import Pentakill from './Pentakill'
 
 const AddPlayers = () => {
     const [allUser, setAllUser] = useState([])
     const [latestMatch, setLatestMatch] = useState()
     const navigate = useNavigate()
-    const [amountLost, setAmountLost] = useState(1)
+    const [amountLost, setAmountLost] = useState(.5)
     const loserAmount = [0, 1, 2, 3]
     
     const [matchWinner, setMatchWinner] = useState({
@@ -29,16 +28,6 @@ const AddPlayers = () => {
     const [pentaLoser, setPentaLoser] = useState()
 
     useEffect(() => {
-            auth.onAuthStateChanged(user => {
-                // if user is NOT null, they are logged in, navigate to dash
-                if (user == null) {
-                    navigate('/')
-                }
-                // if user IS null, navigate to login
-                else if (user != null && user.id !== process.env.REACT_APP_ADMIN_ID){
-                    navigate('/dashboard')
-                }
-            })
         axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
@@ -46,7 +35,7 @@ const AddPlayers = () => {
             .then(response => {
                 setLatestMatch(response.data)
                 if (response.data[0].team_result == 1) {
-                    setAmountLost(2)
+                    setAmountLost(1)
                 }
             })
             .catch(err => console.log(err))

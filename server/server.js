@@ -11,12 +11,17 @@ const db = mysql.createConnection({
 })
 require('dotenv').config();
 const cors = require('cors')
+const corsOption = {
+    origin: ['http://localhost:3000'],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}
 const port = process.env.PORT;
 // 4. import mongoose.config (after config is complete)
 require("./configs/mongoose.config")
 
 // 2. configure express with app.use
-app.use(cors())
+app.use(cors(corsOption))
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 // 5. import routes (after routes are done -- may need to complete the models & the backbone of the controller first)

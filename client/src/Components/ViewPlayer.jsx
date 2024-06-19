@@ -10,7 +10,8 @@ const ViewPlayer = () => {
     const [playerData, setPlayerData] = useState({
         earnings: 0,
         wins: 0,
-        losses: 0
+        losses: 0,
+        quadras: 0
     })
     const [comparePlayerEarnings, setComparePlayerEarnings] = useState(0)
     const [comparePlayerUser, setComparePlayerUser] = useState()
@@ -21,7 +22,8 @@ const ViewPlayer = () => {
             .then(data => setPlayerData({
                 earnings: data.earnings,
                 wins: data.wins,
-                losses: data.losses
+                losses: data.losses,
+                quadras: data.quadras
             }))
         axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))

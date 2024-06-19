@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, Link, useParams } from 'react-router-dom'
-import { onAuthStateChanged, signOut } from 'firebase/auth';
 import SeasonCountdown from './SeasonCountdown'
 import GetBounty from './Bounty'
-import { auth } from '../firebase';
 
+let renderCount = 0
 const NavBar = () => {
     const navigate = useNavigate()
     const [allUser, setAllUser] = useState()
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
+        renderCount++
         axios.get('http://localhost:8000/api/players')
             .then(response => setAllUser(response.data))
             .catch(err => console.log(err))
         // check if user is logged in
-        auth.onAuthStateChanged(user => {
-            // if user is null, they are not logged in, navigate to login
-            if (user != null) {
-                setLoggedIn(true)
-            }
-        })
+        // auth.onAuthStateChanged(user => {
+        //     // if user is null, they are not logged in, navigate to login
+        //     if (user != null) {
+        //         setLoggedIn(true)
+        //     }
+        //     else{
+        //         setLoggedIn(false)
+        //     }
+        // })
     }, [])
     const handleRedirect = (e) => {
         navigate(`/view/player/${e.target.value}`)
@@ -31,21 +34,11 @@ const NavBar = () => {
         navigate(`/${e.target.id}`)
     }
 
-    const handleLogout = () => {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            navigate("/");
-            console.log("Signed out successfully")
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
 
     return (
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             {/* if logged in load NavBar */}
-            {loggedIn ?
                 <div class="container-fluid">
                     <a class="navbar-brand text-primary" onClick={handleNavigate} id="" href="javascript:void(0)" >ARAM League</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,9 +46,6 @@ const NavBar = () => {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item ">
-                                <a class="nav-link active text-warning-emphasis" aria-current="page" onClick={handleNavigate} id="" href="javascript:void(0)">Home</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-warning-emphasis" onClick={handleNavigate} id="view/match" href="javascript:void(0)">Match History</a>
                             </li>
@@ -80,8 +70,14 @@ const NavBar = () => {
 
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-warning-emphasis" href="javascript:void(0)" onClick={handleLogout} id="logout">Log Out</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning-emphasis" onClick={handleNavigate} id="register" href="javascript:void(0)">Register Player</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning-emphasis " onClick={handleNavigate} id="new/match" href="javascript:void(0)">Register Match</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning-emphasis " onClick={handleNavigate} id="quadra" href="javascript:void(0)">Register Quadra</a>
                             </li>
 
 
@@ -96,14 +92,6 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
-                :
-                // If not logged in, only Navbar Logo
-                <div class="container-fluid">
-                <a class="navbar-brand text-primary" onClick={handleNavigate} id="" href="javascript:void(0)" >ARAM League</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>}
 
         </nav>
     )

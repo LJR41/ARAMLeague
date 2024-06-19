@@ -94,3 +94,15 @@ module.exports.comparePlayer = (req,res) => {
 module.exports.regUser = (req, res) =>{
     console.log(req.body)
 }
+
+module.exports.addQuadra = (req,res) =>{
+    let queryLength = req.body.quadraList.length
+    for(let i = 0; i<= queryLength; i++){
+        const query = `UPDATE users SET quadras = quadras +1 WHERE _id = ? `
+        const values = req.body.quadraList[i]
+        db.query(query, [values], (err,data) =>{
+            if(err) return res.json(err)
+            return res.json(data)
+        })
+    }
+}

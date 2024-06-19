@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios, { all } from 'axios'
 import { getEarningsData } from '../data/utils'
 
-let renderCount = 0
 
-const Leaderboard = () => {
-    renderCount++
+const Leaderboard = ({champName}) => {
     const [leaderboardData, setLeaderboardData] = useState([{}])
 
     useEffect(() => {
@@ -27,14 +25,13 @@ const Leaderboard = () => {
                         
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err +" here"))
 
     }, [])
-
     return (
         <div class="row d-flex justify-content-center">
             <div class='col-4'>
-                <div><h4 class="mt-3">Top Earners({renderCount})</h4></div>
+                <div><h4 class="mt-3">Top Earners</h4></div>
                 {leaderboardData ? <div class="mt-3"><table class="table table-sm table-secondary table-bordered" >
                     <thead>
                         <tr>
@@ -49,7 +46,7 @@ const Leaderboard = () => {
                             return (
                                 <tr>
                                     <th scope="row">{Idx + 1}</th>
-                                    <td>{eachUser.display_name}</td>
+                                    <td>{eachUser.display_name == champName? '👑 ': ''}{eachUser.display_name}</td>
                                     <td>{eachUser.earnings >= 0 ? <p class="text-success">${eachUser.earnings}</p> : <p class="text-danger">-${eachUser.earnings * -1}</p>}</td>
                                     <td>{eachUser.wins}</td>
                                 </tr>

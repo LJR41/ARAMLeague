@@ -17,7 +17,7 @@ const PentaLeaders = (props) => {
                 }
                 for (let i = 0; i <= pentaLeaders.length-1; i++) {
                     for (let j = i + 1; j <= pentaLeaders.length-1; j++) {
-                        if (pentaLeaders[i].display_name == pentaLeaders[j].display_name) {
+                        if (pentaLeaders[i].display_name === pentaLeaders[j].display_name) {
                             pentaLeaders.splice(j, 1)
                             pentaLeaders[i].penta_amt += 1
                             j -= 1

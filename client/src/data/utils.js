@@ -1,5 +1,4 @@
 import axios from "axios"
-import { auth } from "../firebase"
 
 export async function getEarningsData(id) {
     let userResponse = await axios.get(`http://localhost:8000/api/player/${id}`)
@@ -30,18 +29,7 @@ export async function getEarningsData(id) {
         display_name: user_display_name,
         wins: matchesWon.length,
         losses: matchesLost.length,
-        earnings: winTotal - lossTotal
+        earnings: winTotal - lossTotal,
+        quadras : userResponse.data[0].quadras
     }
-}
-
-export function seshCheck(){
-    auth.onAuthStateChanged(user => {
-    // if user is null, they are not logged in, navigate to login
-    if(user == null){
-        return false
-    }
-    else{
-        return true
-    }
-})
 }

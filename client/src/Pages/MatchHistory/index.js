@@ -7,9 +7,6 @@ const History = () => {
   const navigate = useNavigate()
   useEffect(() => {
     // check if user is logged in
-    if (seshCheck() == false) {
-      navigate('/')
-    }
   }, [])
   return (
     <div><MatchHistory /></div>

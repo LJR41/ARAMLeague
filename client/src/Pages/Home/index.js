@@ -3,31 +3,34 @@ import { useNavigate } from 'react-router-dom'
 import Leaderboard from '../../Components/Leaderboard'
 import TopDamage from '../../Components/TopDamage'
 import PentaLeaders from '../../Components/PentaLeaders'
-import { seshCheck } from '../../data/utils'
+import { QuadraLeaders } from '../../Components/QuadraLeaders'
 
 
-const HomePage = () => {
+const HomePage = (props) => {
+  const championName = 'Higgs0'
   const navigate = useNavigate()
   useEffect(() => {
     // check if user is logged in
-    if (seshCheck() == false) {
-      navigate('/')
-    }
+    // if (seshCheck() == false) {
+    //   navigate('/')
+    // }
   }, [])
-
   const [pentaLeaders, setPentaLeaders] = useState()
   const pentaAmt = (pentaAmt) => {
     setPentaLeaders(pentaAmt)
   }
 
+  
+
   return (
     <div>
       <div>
-        <Leaderboard />
+        <Leaderboard champName={championName}/>
       </div>
       <div class="d-flex justify-content-evenly">
-        <TopDamage />
-        <PentaLeaders pentaAmt={pentaAmt} />
+        <TopDamage champName={championName}/>
+        <PentaLeaders pentaAmt={pentaAmt} champName={championName} />
+        <QuadraLeaders champName={championName}/>
       </div>
     </div>
   )

@@ -14,6 +14,7 @@ const UserRoutes =  (app) =>{
     app.get("/api/win/:id", UserController.onePlayerWin)
     app.get("/api/loss/:id", UserController.onePlayerLoss)
     app.post("/api/compare/player", UserController.comparePlayer)
+    app.post("/api/quadra/add", UserController.addQuadra)
     
     
 }

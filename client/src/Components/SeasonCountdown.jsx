@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 
 const SeasonCountdown = () => {
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 21, 2024 22:00:00").getTime();
+    var countDownDate = new Date("Sept 25, 2024 24:00:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -33,7 +33,7 @@ const SeasonCountdown = () => {
         <div >
             {/* <h2>{timer}</h2> */}
             <div class="d-flex justify-content-center">
-                <p class="mx-2 fw-bold text-primary-emphasis">Playoffs Ends: </p>
+                <p class="mx-2 fw-bold text-primary-emphasis">Season Ends: </p>
                 <p id="timer" class="text-warning-emphasis"></p>
             </div>
             {/* <button onClick={onClickReset}>Reset</button> */}

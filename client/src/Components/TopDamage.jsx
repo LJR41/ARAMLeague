@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const TopDamage = () => {
+const TopDamage = ({champName}) => {
     const [damageLeaderboard, setDamageLeaderboard] = useState([{}])
 
     useEffect(() => {
@@ -33,7 +33,7 @@ return (
                                 return (
                                     <tr>
                                         <th scope="row">{Idx +1}</th>
-                                        <td>{eachUser.display_name}</td>
+                                        <td>{eachUser.display_name === champName? '👑 ': ' '} {eachUser.display_name}</td>
                                         <td>{eachUser.damage_dealt}</td>
                                         <td>{eachUser.champion_name}</td>
                                     </tr>
